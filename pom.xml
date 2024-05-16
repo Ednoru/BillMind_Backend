@@ -14,7 +14,7 @@
     <name>BillMind_Backend</name>
     <description>BillMind_Backend</description>
     <properties>
-        <java.version>21</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
