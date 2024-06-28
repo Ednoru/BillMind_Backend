@@ -84,6 +84,21 @@ public class ClientController {
         return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
+    @PostMapping("/{clientId}/debts")
+    public ResponseEntity<Debts> addDebtToClient(
+            @PathVariable Long clientId,
+            @RequestBody Debts debt
+    ) {
+        Client client = clientService.getClientById(clientId);
+        if (client == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        debt.setClient(client);
+        Debts savedDebt = debtService.createDebt(debt);
+        return new ResponseEntity<>(savedDebt, HttpStatus.CREATED);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateClient(@RequestBody Client client) {
         clientService.updateClient(client);

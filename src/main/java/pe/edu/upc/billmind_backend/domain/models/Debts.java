@@ -30,4 +30,8 @@ public class Debts {
     @ManyToOne
     @JoinColumn(name = "Client_id")
     private Client clientId;
+
+    public void setClient(Client client) {
+        this.clientId = client;
+    }
 }
