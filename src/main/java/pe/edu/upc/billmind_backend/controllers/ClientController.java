@@ -105,6 +105,32 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PatchMapping("/updatePass/{id}")
+    public ResponseEntity<Void> updateClientPassword(@PathVariable Long id, @RequestBody String password) {
+        Client client = clientService.getClientById(id);
+        if (client == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        client.setPassword(password);
+        clientService.updateClient(client);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //Actualizar nombre, apellido, correo y teléfono
+    @PatchMapping("/updateInfo/{id}")
+    public ResponseEntity<Void> updateClientInfo(@PathVariable Long id, @RequestBody Client client) {
+        Client clientToUpdate = clientService.getClientById(id);
+        if (clientToUpdate == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        clientToUpdate.setName(client.getName());
+        clientToUpdate.setLast_name(client.getLast_name());
+        clientToUpdate.setMail(client.getMail());
+        clientToUpdate.setPhone(client.getPhone());
+        clientService.updateClient(clientToUpdate);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteClient(@PathVariable Long id) {
         clientService.deleteClient(id);
