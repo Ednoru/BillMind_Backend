@@ -32,6 +32,10 @@ public class ClientService {
         return clientRepository.save(client);
     }
 
+    public Client findByEmailAndPassword(String mail, String password) {
+        return clientRepository.findByMailAndPassword(mail, password);
+    }
+
     public void updateClient(Client client) {
         clientRepository.save(client);
     }

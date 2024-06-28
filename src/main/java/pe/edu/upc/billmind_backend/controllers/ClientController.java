@@ -75,6 +75,15 @@ public class ClientController {
         return new ResponseEntity<>(savedClient, HttpStatus.CREATED);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<Client> login(@RequestBody LoginRequest loginRequest) {
+        Client client = clientService.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
+        if (client == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        return new ResponseEntity<>(client, HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateClient(@RequestBody Client client) {
         clientService.updateClient(client);

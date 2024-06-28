@@ -8,4 +8,5 @@ import pe.edu.upc.billmind_backend.domain.models.Client;
 public interface ClientRepository extends JpaRepository<Client, Long>
 {
     Client findByMail(String mail);
+    Client findByMailAndPassword(String mail, String password);
 }
